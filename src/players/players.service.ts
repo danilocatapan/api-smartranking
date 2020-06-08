@@ -11,7 +11,15 @@ export class PlayersService {
   private readonly logger = new Logger(PlayersService.name)
 
   async save(createPlayerDto: CreatePlayerDto): Promise<void> {
-    await this.create(createPlayerDto);
+    const { email } = createPlayerDto;
+
+    const playerFound = await this.players.find(player => player.email === email)
+
+    if (playerFound) {
+      await this.update(playerFound, createPlayerDto)
+    }else {
+      await this.create(createPlayerDto);
+    }
   }
 
   async get(): Promise<Player[]> {
@@ -29,7 +37,11 @@ export class PlayersService {
       positionRanking: faker.random.number(),
       urlPhotoPlayer: faker.image.imageUrl()
     }
-    this.logger.log(`createPlayerDto: ${JSON.stringify(player)}`);
     this.players.push(player);
+  }
+
+  private update(playerFound: Player, createPlayerDto: CreatePlayerDto): void {
+    const { name } = createPlayerDto;
+    playerFound.name = name;
   }
 }
