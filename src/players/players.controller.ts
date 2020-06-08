@@ -1,4 +1,12 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Post } from '@nestjs/common';
 
 @Controller('api/v1/players')
-export class PlayersController {}
+export class PlayersController {
+
+  @Post()
+  async save() {
+    return JSON.stringify({
+      "name": "Danilo"
+    })
+  }
+}
