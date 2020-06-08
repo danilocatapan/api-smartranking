@@ -27,5 +27,6 @@ export class PlayersService {
       urlPhotoPlayer: faker.image.imageUrl()
     }
     this.players.push(player);
+    console.log(player)
   }
 }
