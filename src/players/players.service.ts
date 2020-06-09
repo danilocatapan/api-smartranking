@@ -7,9 +7,6 @@ import { Model } from 'mongoose'
 
 @Injectable()
 export class PlayersService {
-
-  private players: Player[] = []
-
   constructor (@InjectModel('Player') private playerModel: Model<Player>) {}
 
   private readonly logger = new Logger(PlayersService.name)
@@ -31,7 +28,7 @@ export class PlayersService {
   }
 
   async getByEmail(email: string): Promise<Player> {
-    const playerFound = await this.players.find(player => player.email === email)
+    const playerFound = await this.playerModel.findOne({ email }).exec()
     if (!playerFound) {
       throw new NotFoundException(`Player not found with email ${email}`)
     }
