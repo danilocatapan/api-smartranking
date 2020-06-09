@@ -20,7 +20,7 @@ export class PlayersService {
     const playerFound = await this.playerModel.findOne({ email }).exec()
 
     if (playerFound) {
-      await this.update(playerFound, createPlayerDto)
+      await this.update(createPlayerDto)
     }else {
       await this.create(createPlayerDto)
     }
@@ -52,8 +52,10 @@ export class PlayersService {
     return await player.save()
   }
 
-  private update(playerFound: Player, createPlayerDto: CreatePlayerDto): void {
-    const { name } = createPlayerDto
-    playerFound.name = name
+  private async update(createPlayerDto: CreatePlayerDto): Promise<Player> {
+    const player = this.playerModel.findByIdAndUpdate(
+      { email: createPlayerDto.email }, { $set: createPlayerDto }).exec()
+
+    return player
   }
 }
