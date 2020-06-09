@@ -27,7 +27,7 @@ export class PlayersService {
   }
 
   async get(): Promise<Player[]> {
-    return await this.players
+    return await this.playerModel.find().exec()
   }
 
   async getByEmail(email: string): Promise<Player> {
