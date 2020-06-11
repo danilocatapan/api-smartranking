@@ -1,5 +1,5 @@
 import { CategoriesController, CategoriesService } from './'
-import { CategorySchema } from './interfaces'
+import { CategorySchema } from './db/category.schema'
 import { PlayersModule } from 'src/players'
 import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
