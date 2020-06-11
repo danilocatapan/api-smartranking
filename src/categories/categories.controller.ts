@@ -31,8 +31,5 @@ export class CategoriesController {
       await this.categoriesService.update(category, updateCategoryDto)
   }
 
-  @Post('/:category/players/:id')
-  async addPlayer(@Param('category') category: string, @Param('id') idPlayer: string): Promise<void> {
-    return await this.categoriesService.addPlayer(category, idPlayer)
-  }
+
 }
