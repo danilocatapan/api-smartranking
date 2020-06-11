@@ -43,4 +43,12 @@ export class ChallengeService {
     challenge.status = ChallengeStatus.PENDING
     return await challenge.save()
   }
+
+  async get(): Promise<Challenge[]> {
+    return await this.challengeModel.find()
+      .populate('challenger')
+      .populate('players')
+      .populate('match')
+      .exec()
+  }
 }
