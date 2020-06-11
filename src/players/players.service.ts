@@ -1,7 +1,6 @@
 import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common'
 import { CreatePlayerDto } from './dtos/create-player.dto'
 import { Player } from './interfaces/player.interface'
-import * as faker from 'faker'
 import { InjectModel } from '@nestjs/mongoose'
 import { Model } from 'mongoose'
 import { UpdatePlayerDto } from './dtos'
@@ -22,6 +21,15 @@ export class PlayersService {
     return await player.save()
   }
 
+  async update(id: string, updatePlayerDto: UpdatePlayerDto): Promise<void> {
+    const player = await this.playerModel.findOne({ _id: id }).exec()
+    if (!player) {
+      throw new NotFoundException(`Player not found with id ${id}`)
+    }
+    
+    this.playerModel.findOneAndUpdate({ _id: id }, { $set: updatePlayerDto }).exec()
+  }
+
   async get(): Promise<Player[]> {
     return await this.playerModel.find().exec()
   }
@@ -40,12 +48,6 @@ export class PlayersService {
       throw new NotFoundException(`Player not found with id ${id}`)
     }
     const player = this.playerModel.deleteOne({ _id: id }).exec()
-  }
-
-  private async update(createPlayerDto: CreatePlayerDto): Promise<Player> {
-    const player = this.playerModel.findByIdAndUpdate(
-      { email: createPlayerDto.email }, { $set: createPlayerDto }).exec()
-
     return player
   }
 }
