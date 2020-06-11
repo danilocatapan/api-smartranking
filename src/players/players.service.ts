@@ -34,6 +34,7 @@ export class PlayersService {
   }
 
   async getById(id: string): Promise<Player> {
+    console.log('id', id)
     const playerFound = await this.playerModel.findOne({ _id: id }).exec()
     if (!playerFound) {
       throw new NotFoundException(`Player not found with id ${id}`)
