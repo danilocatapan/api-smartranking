@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Get, Query, Delete, UsePipes, ValidationPipe, Param } from '@nestjs/common'
-import { CreatePlayerDto } from './dtos/create-player.dto'
+import { CreatePlayerDto } from './dtos'
 import { PlayersService } from './players.service'
 import { Player } from './interfaces/player.interface'
 import { PlayersParametersValidationPipe } from './pipes/player-parameters-validation.pipes'
@@ -10,8 +10,9 @@ export class PlayersController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  async save(@Body() createPlayerDto: CreatePlayerDto) {
-    await this.playerService.save(createPlayerDto)
+  async save(@Body() createPlayerDto: CreatePlayerDto): Promise<Player> {
+    const player = await this.playerService.save(createPlayerDto)
+    return player
   }
 
   @Get()
