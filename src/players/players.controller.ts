@@ -24,8 +24,8 @@ export class PlayersController {
     return this.playerService.getById(id)
   }
 
-  @Delete()
-  async delete(@Query('email', PlayersParametersValidationPipe) email: string): Promise<Player> {
-    return this.playerService.delete(email)
+  @Delete('/:id')
+  async delete(@Param('id', PlayersParametersValidationPipe) id: string): Promise<Player> {
+    return this.playerService.delete(id)
   }
 }

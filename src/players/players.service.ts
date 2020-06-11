@@ -35,8 +35,13 @@ export class PlayersService {
     return playerFound
   }
 
-  async delete(email: string): Promise<any> {
-    const player = this.playerModel.deleteOne({ email }).exec()
+  async delete(id: string): Promise<any> {
+    const playerFound = await this.playerModel.findOne({ _id: id }).exec()
+    if (!playerFound) {
+      throw new NotFoundException(`Player not found with id ${id}`)
+    }
+    const player = this.playerModel.deleteOne({ _id: id }).exec()
+    return player
   }
 
   private async create(createPlayerDto: CreatePlayerDto): Promise<Player> {
