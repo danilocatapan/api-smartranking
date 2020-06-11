@@ -1,7 +1,7 @@
 import { Category } from './interfaces'
 import { CategoriesService } from './categories.service'
 import { CreateCategoryDto } from './dtos/create-category.dto'
-import { Controller, Body, Post, UsePipes, ValidationPipe, Get } from '@nestjs/common'
+import { Controller, Body, Post, UsePipes, ValidationPipe, Get, Param } from '@nestjs/common'
 
 @Controller('api/v1/categories')
 export class CategoriesController {
@@ -16,5 +16,10 @@ export class CategoriesController {
   @Get()
   async get(): Promise<Category[]> {
     return await this.categoriesService.get()
+  }
+
+  @Get('/:category')
+  async getByCategory(@Param('category') category: string): Promise<Category> {
+    return await this.categoriesService.getByCategory(category)
   }
 }
