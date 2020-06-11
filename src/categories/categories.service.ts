@@ -33,13 +33,13 @@ export class CategoriesService {
     return foundCategory
   }
 
-  async getByIdPlayer(id: string): Promise<Category> {
+  async getByIdPlayer(id: any): Promise<Category> {
     const players = await this.playersServices.get()
-    const filter = players.filter(player => player._id === id)
-    if (filter.length === 0) {
-      throw new BadRequestException(`The id ${id} is not a valid player`)
+    const filter = players.filter(player => player._id == id)
+    if (filter.length == 0) {
+      throw new BadRequestException(`The id ${id} is not a valid player to this category`)
     }
-    return await this.categoryModel.findOne().where('players').in([id]).exec()
+    return await this.categoryModel.findOne().where('players').in(id).exec()
   }
 
   async update(category: string, updateCategoryDto: UpdateCategoryDto): Promise<void> {
