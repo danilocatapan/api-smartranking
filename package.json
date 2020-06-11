@@ -29,6 +29,7 @@
     "class-validator": "^0.12.2",
     "faker": "^4.1.0",
     "git-commit-msg-linter": "^2.4.2",
+    "moment-timezone": "^0.5.31",
     "mongoose": "^5.9.18",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
