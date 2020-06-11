@@ -3,12 +3,12 @@ import { Category } from './interfaces'
 import { PlayersService } from 'src/players'
 import { InjectModel } from '@nestjs/mongoose'
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common'
-import * as mongoose from 'mongoose'
+import { Model } from 'mongoose'
 
 @Injectable()
 export class CategoriesService {
   constructor (
-    @InjectModel('Category') private readonly categoryModel: mongoose.Model<Category>,
+    @InjectModel('Category') private readonly categoryModel: Model<Category>,
     private readonly playersServices: PlayersService) {}
 
   async save(createCategoryDto: CreateCategoryDto): Promise<Category> {
@@ -45,10 +45,6 @@ export class CategoriesService {
     const foundCategory = await this.categoryModel.findOne({ category }).exec()
     if (!foundCategory) {
       throw new NotFoundException(`Category ${category} not found`)
-    }
-
-    if (!mongoose.Types.ObjectId.isValid(idPlayer)) {
-      throw new BadRequestException(`Invalid id ${idPlayer}`)
     }
 
     const foundPlayer = await this.categoryModel.find({ category }).where('players').in([idPlayer]).exec()
