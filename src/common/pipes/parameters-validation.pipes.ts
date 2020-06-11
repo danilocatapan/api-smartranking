@@ -1,6 +1,6 @@
-import { PipeTransform, ArgumentMetadata, BadRequestException } from "@nestjs/common";
+import { PipeTransform, ArgumentMetadata, BadRequestException } from "@nestjs/common"
 
-export class PlayersParametersValidationPipe implements PipeTransform {
+export class ParametersValidationPipe implements PipeTransform {
   transform (value: any, metaData: ArgumentMetadata) {
     if (!value) {
       throw new BadRequestException(`The parameter ${metaData.data} can't be empty`)
