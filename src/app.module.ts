@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { MongooseModule } from '@nestjs/mongoose'
 import { PlayersModule } from './players/players.module'
 import { CategoriesModule } from './categories/categories.module';
+import { ChallengeModule } from './challenge/challenge.module';
 
 @Module({
   imports: [
@@ -9,7 +10,8 @@ import { CategoriesModule } from './categories/categories.module';
       'mongodb+srv://admin:admin123@cluster0-wyrd1.mongodb.net/smartranking?retryWrites=true&w=majority',
       { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }),
     PlayersModule,
-    CategoriesModule],
+    CategoriesModule,
+    ChallengeModule],
   controllers: [],
   providers: [],
 })
