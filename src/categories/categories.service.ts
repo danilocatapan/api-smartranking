@@ -33,7 +33,7 @@ export class CategoriesService {
     return foundCategory
   }
 
-  async getByIdPlayer(id: any): Promise<Category> {
+  async getByPlayerId(id: any): Promise<Category> {
     const players = await this.playersServices.get()
     const filter = players.filter(player => player._id == id)
     if (filter.length == 0) {

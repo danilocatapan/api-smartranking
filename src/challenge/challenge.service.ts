@@ -30,7 +30,7 @@ export class ChallengeService {
       throw new BadRequestException(`The challenger must be a match player`)
     }
 
-    const category = await this.categoriesService.getByIdPlayer(createChallengeDto.challenger)
+    const category = await this.categoriesService.getByPlayerId(createChallengeDto.challenger)
 
     if (!category) {
       throw new BadRequestException(`The challenger must be registered in a category`)
@@ -52,7 +52,7 @@ export class ChallengeService {
       .exec()
   }
 
-  async getByIdPlayer(id: string): Promise<Challenge[]> {
+  async getByPlayerId(id: string): Promise<Challenge[]> {
     await this.playersService.getById(id)
     return await this.challengeModel.find()
       .where('players')

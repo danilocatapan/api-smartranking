@@ -19,7 +19,7 @@ export class ChallengeController {
   }
 
   @Get('/:id')
-  async getByIdPlayer(@Param('id') id: string): Promise<Challenge[]> {
-    return await this.challengeService.getByIdPlayer(id)
+  async getByPlayerId(@Param('id') id: string): Promise<Challenge[]> {
+    return await this.challengeService.getByPlayerId(id)
   }
 }
