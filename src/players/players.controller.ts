@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query, Delete, UsePipes, ValidationPipe, Param, Put } from '@nestjs/common'
+import { Controller, Post, Body, Get, Delete, UsePipes, ValidationPipe, Param, Put } from '@nestjs/common'
 import { CreatePlayerDto, UpdatePlayerDto } from './dtos'
 import { PlayersService } from './players.service'
 import { Player } from './interfaces/player.interface'

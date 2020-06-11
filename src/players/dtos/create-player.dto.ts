@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsEmail, isNotEmpty, IsPhoneNumber, IsMobilePhone } from 'class-validator'
+import { IsNotEmpty, IsEmail, IsMobilePhone } from 'class-validator'
 
 export class CreatePlayerDto {
   @IsNotEmpty()
