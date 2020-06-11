@@ -27,10 +27,10 @@ export class PlayersService {
     return await this.playerModel.find().exec()
   }
 
-  async getByEmail(email: string): Promise<Player> {
-    const playerFound = await this.playerModel.findOne({ email }).exec()
+  async getById(id: string): Promise<Player> {
+    const playerFound = await this.playerModel.findOne({ _id: id }).exec()
     if (!playerFound) {
-      throw new NotFoundException(`Player not found with email ${email}`)
+      throw new NotFoundException(`Player not found with id ${id}`)
     }
     return playerFound
   }
