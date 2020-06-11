@@ -1,9 +1,8 @@
 import { Injectable, Logger, NotFoundException, BadRequestException } from '@nestjs/common'
-import { CreatePlayerDto } from './dtos/create-player.dto'
-import { Player } from './interfaces/player.interface'
 import { InjectModel } from '@nestjs/mongoose'
+import { Player } from './interfaces/player.interface'
+import { CreatePlayerDto, UpdatePlayerDto } from './dtos'
 import { Model } from 'mongoose'
-import { UpdatePlayerDto } from './dtos'
 
 @Injectable()
 export class PlayersService {
