@@ -51,4 +51,15 @@ export class ChallengeService {
       .populate('match')
       .exec()
   }
+
+  async getByIdPlayer(id: string): Promise<Challenge[]> {
+    await this.playersService.getById(id)
+    return await this.challengeModel.find()
+      .where('players')
+      .in([id])
+      .populate('challenger')
+      .populate('players')
+      .populate('match')
+      .exec()
+  }
 }
