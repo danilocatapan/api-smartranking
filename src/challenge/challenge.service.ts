@@ -1,10 +1,10 @@
 import { Challenge } from './interface'
-import { CreateChallengeDto } from './dtos/create-challenge.dto'
+import { CreateChallengeDto, UpdateChallengeDto } from './dtos'
 import { ChallengeStatus } from './enums/challenge-status.enum'
 import { PlayersService } from 'src/players'
 import { CategoriesService } from 'src/categories'
 import { InjectModel } from '@nestjs/mongoose'
-import { Injectable, BadRequestException } from '@nestjs/common'
+import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common'
 import { Model } from 'mongoose'
 
 @Injectable()
@@ -61,5 +61,18 @@ export class ChallengeService {
       .populate('players')
       .populate('match')
       .exec()
+  }
+
+  async update(id: string, updateChallengeDto: UpdateChallengeDto): Promise<void> {
+    const challenge = await this.challengeModel.findById(id).exec()
+    if (!challenge) {
+      throw new NotFoundException(`Challenge ${id} not found`)
+    }
+    if (updateChallengeDto.status) {
+      challenge.DateHoraResponse = new Date()
+    }
+    challenge.status = updateChallengeDto.status
+    challenge.dateHourChallenge = updateChallengeDto.dateHourChallenge
+    await this.challengeModel.findByIdAndUpdate({ _id: id }, { $set: challenge }).exec()
   }
 }
