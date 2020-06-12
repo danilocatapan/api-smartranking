@@ -4,7 +4,7 @@ import { CreateChallengeDto, UpdateChallengeDto, AddMathChallengeDto } from './d
 import { ChallengeStatusValidationPipe } from './pipes/challenge-status-validation.pipe'
 import { Controller, Post, UsePipes, ValidationPipe, Body, Get, Param, Put } from '@nestjs/common'
 
-@Controller('api/v1/challenge')
+@Controller('api/v1/challenges')
 export class ChallengeController {
   constructor(private readonly challengeService: ChallengeService) {}
 
