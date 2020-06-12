@@ -17,10 +17,8 @@ module.exports = {
     jest: true,
   },
   rules: {
-    "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/consistent-type-definitions": "off",
-    "@typescript-eslint/comma-spacing": "off",
-    "@typescript-eslint/return-await": "off",
-    "@typescript-eslint/restrict-template-expressions": "off"
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 };
