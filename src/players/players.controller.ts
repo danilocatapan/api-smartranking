@@ -2,7 +2,7 @@ import { Controller, Post, Body, Get, Delete, UsePipes, ValidationPipe, Param, P
 import { CreatePlayerDto, UpdatePlayerDto } from './dtos'
 import { PlayersService } from './players.service'
 import { Player } from './interfaces/player.interface'
-import { ParametersValidationPipe } from '../common/pipes/parameters-validation.pipes'
+import { ParametersValidationPipe } from '../common/pipes/parameters-validation.pipe'
 
 @Controller('api/v1/players')
 export class PlayersController {
