@@ -1,5 +1,5 @@
-import { Challenge } from './interface'
-import { CreateChallengeDto, UpdateChallengeDto } from './dtos'
+import { Challenge, Match } from './interface'
+import { CreateChallengeDto, UpdateChallengeDto, AddMathChallengeDto } from './dtos'
 import { ChallengeStatus } from './enums/challenge-status.enum'
 import { PlayersService } from 'src/players'
 import { CategoriesService } from 'src/categories'
@@ -11,6 +11,7 @@ import { Model } from 'mongoose'
 export class ChallengeService {
   constructor(
     @InjectModel('Challenge') private readonly challengeModel: Model<Challenge>,
+    @InjectModel('Match') private readonly matchModel: Model<Match>,
     private readonly playersService: PlayersService,
     private readonly categoriesService: CategoriesService
   ) {}
@@ -73,6 +74,28 @@ export class ChallengeService {
     }
     challenge.status = updateChallengeDto.status
     challenge.dateHourChallenge = updateChallengeDto.dateHourChallenge
+    await this.challengeModel.findByIdAndUpdate({ _id: id }, { $set: challenge }).exec()
+  }
+
+  async addMath(id: string, addMathChallengeDto: AddMathChallengeDto): Promise<void> {
+    const challenge = await this.challengeModel.findById(id).exec()
+    if (!challenge) {
+      throw new NotFoundException(`Challenge ${id} not found`)
+    }
+
+    const player = challenge.players.filter(player => player._id == addMathChallengeDto.winner)
+    if (player.length === 0) {
+      throw new BadRequestException(`The winner must be a match player`)
+    }
+
+    const match = new this.matchModel(addMathChallengeDto)
+    match.category = challenge.category
+    match.players = challenge.players
+    const result = await match.save()
+
+    challenge.status = ChallengeStatus.DONE
+    challenge.match = result._id
+
     await this.challengeModel.findByIdAndUpdate({ _id: id }, { $set: challenge }).exec()
   }
 }
