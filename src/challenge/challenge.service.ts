@@ -98,4 +98,13 @@ export class ChallengeService {
 
     await this.challengeModel.findByIdAndUpdate({ _id: id }, { $set: challenge }).exec()
   }
+
+  async delete(id: string): Promise<void> {
+    const challenge = await this.challengeModel.findById(id).exec()
+    if (!challenge) {
+      throw new NotFoundException(`Challenge ${id} not found`)
+    }
+    challenge.status = ChallengeStatus.CANCELED
+    await this.challengeModel.findByIdAndUpdate({ _id: id }, { $set: challenge }).exec()
+  }
 }
