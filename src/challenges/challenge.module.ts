@@ -1,4 +1,4 @@
-import { ChallengeController, ChallengeService } from './';
+import { ChallengeController, ChallengeService } from '.';
 import { ChallengeSchema, MatchSchema } from './db';
 import { PlayersModule } from 'src/players';
 import { CategoriesModule } from 'src/categories';

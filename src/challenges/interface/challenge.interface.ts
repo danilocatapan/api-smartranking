@@ -1,4 +1,4 @@
-import { Match } from "./"
+import { Match } from "."
 import { ChallengeStatus } from "../enums/challenge-status.enum"
 import { Player } from "src/players/interfaces"
 import { Document } from "mongoose"

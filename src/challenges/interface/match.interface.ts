@@ -1,4 +1,4 @@
-import { Result } from "./";
+import { Result } from ".";
 import { Player } from "src/players/interfaces";
 import { Document } from "mongoose"
 
