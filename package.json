@@ -27,7 +27,6 @@
     "@nestjs/platform-express": "^7.0.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
-    "faker": "^4.1.0",
     "git-commit-msg-linter": "^2.4.2",
     "moment-timezone": "^0.5.31",
     "mongoose": "^5.9.18",
