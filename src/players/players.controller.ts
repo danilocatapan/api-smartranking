@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Delete, UsePipes, ValidationPipe, Param, Put, Res, HttpStatus } from '@nestjs/common'
+import { Controller, Post, Body, Get, Delete, UsePipes, ValidationPipe, Param, Put } from '@nestjs/common'
 import { CreatePlayerDto, UpdatePlayerDto } from './dtos'
 import { PlayersService } from './players.service'
 import { Player } from './interfaces/player.interface'
@@ -10,14 +10,9 @@ export class PlayersController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  save(@Body() createPlayerDto: CreatePlayerDto, @Res() response) {
-    this.playerService.save(createPlayerDto).then(message => {
-      response.status(HttpStatus.CREATED).json(message)
-    }).catch(() => {
-      response.status(HttpStatus.FORBIDDEN).json({
-        message: 'Error to create player!'
-      })
-    })
+  async save(@Body() createPlayerDto: CreatePlayerDto): Promise<Player> {
+    const player = await this.playerService.save(createPlayerDto)
+    return player
   }
   
   @Put('/:id')
