@@ -1,9 +1,9 @@
-import { IsNotEmpty, IsMobilePhone } from 'class-validator'
+import { IsNotEmpty, IsMobilePhone } from 'class-validator';
 
 export class UpdatePlayerDto {
   @IsNotEmpty()
-  readonly name: string
+  readonly name: string;
   @IsNotEmpty()
   @IsMobilePhone()
-  readonly cellphone: string
+  readonly cellphone: string;
 }

@@ -8,11 +8,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 @Module({
   imports: [
     MongooseModule.forFeature([
-      {name: 'Challenge', schema: ChallengeSchema},
-      {name: 'Match', schema: MatchSchema}]),
+      { name: 'Challenge', schema: ChallengeSchema },
+      { name: 'Match', schema: MatchSchema },
+    ]),
     PlayersModule,
-    CategoriesModule],
+    CategoriesModule,
+  ],
   controllers: [ChallengeController],
-  providers: [ChallengeService]
+  providers: [ChallengeService],
 })
 export class ChallengeModule {}

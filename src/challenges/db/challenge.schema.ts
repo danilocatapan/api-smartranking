@@ -1,18 +1,23 @@
 import * as mongoose from 'mongoose';
 
-export const ChallengeSchema = new mongoose.Schema({
-  dateHourChallenge: { type: Date },
+export const ChallengeSchema = new mongoose.Schema(
+  {
+    dateHourChallenge: { type: Date },
     status: { type: String },
     dateHoraRequest: { type: Date },
     DateHoraResponse: { type: Date },
-    challenger: { type: mongoose.Schema.Types.ObjectId, ref: "Player" },
+    challenger: { type: mongoose.Schema.Types.ObjectId, ref: 'Player' },
     category: { type: String },
-    players: [{
+    players: [
+      {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Player"
-    }],
+        ref: 'Player',
+      },
+    ],
     match: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: "Match" 
-    },    
-}, { timestamps: true, collection: 'challenges' })
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Match',
+    },
+  },
+  { timestamps: true, collection: 'challenges' },
+);

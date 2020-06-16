@@ -1,3 +1,3 @@
 export interface Result {
-  set: string
+  set: string;
 }
